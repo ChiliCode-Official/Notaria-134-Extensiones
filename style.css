@@ -55,9 +55,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--background);
     color: var(--on-surface);
@@ -158,6 +159,7 @@ body {
    MAIN CONTENT
    ======================================== */
 .main {
+    flex: 1;
     padding: var(--space-8) 0;
 }
 
@@ -742,14 +744,61 @@ body {
     margin-top: var(--space-12);
 }
 
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Footer branding ---------------------------------------------------- */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.footer-logo {
+    width: 70px;
+    height: auto;
+    opacity: 0.9;
+}
+
+.footer-credit {
+    font-size: 14px;
+    color: var(--on-surface-variant);
+    line-height: 1.4;
+    text-align: center;
+}
+.footer-credit .footer-by { font-weight: 400; }
+.footer-credit .footer-company { font-weight: 700; color: var(--google-blue); }
+.footer-credit .footer-ceo { font-weight: 300; }
+
+.social-icons {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+}
+
+.social-link {
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    color: var(--google-blue);
+    transform: translateY(-2px);
+}
+
 .footer-text {
     text-align: center;
     font-size: 13px;
     color: var(--on-surface-variant);
+    margin-top: var(--space-2);
 }
 
 .footer-legal {
-    margin-top: var(--space-2);
     font-size: 11px;
     color: var(--on-surface-variant);
     opacity: 0.7;
@@ -759,6 +808,7 @@ body {
     gap: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-align: center;
 }
 
 .footer-legal .info-icon {
@@ -1072,4 +1122,28 @@ body {
     .empty-title {
         font-size: 18px;
     }
+}
+
+/* ==== Watermark ==== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 30vw;
+    max-width: 300px;
+    max-height: 300px;
+    background: url('chilicode.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure main content appears above watermark */
+.header, .main, .footer, .result-card, .floor-item {
+    position: relative;
+    z-index: 1;
 }
